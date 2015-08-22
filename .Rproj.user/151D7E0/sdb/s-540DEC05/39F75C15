@@ -1,0 +1,16 @@
+{
+    "contents" : "## Put comments here that give an overall description of what your\n## functions do\n\n## `makeCacheMatrix`: This function creates a special \"matrix\" object\n## that can cache its inverse.\n## the 'makeCacheMatrix' function comprises the following functions:\n##  setMatrix - set the value \n##  getMatrix - get the value\n##  cacheInverse - get the cached value (i.e., the inverse of the matrix)\n##  getInverse - get the inverse\n\nmakeCacheMatrix <- function(x = matrix()) {\n# holds cached value. NULL as initial\n  m <- NULL\n  \n  #setMatrix\n  setMatrix <- function(newValue) {\n    x <<- newValue\n    m <<- NULL\n  }\n  \n  #getMatrix\n  getMatrix <- function() {\n    x\n  }\n  \n  # Cache\n  cacheInverse <- function(solve) {\n    m <<- solve\n  }\n  \n  # Get Cache\n  getInverse <- function() {\n    m\n  }\n  \n  #return list\n  list(setMatrix = setMatrix, getMatrix = getMatrix, cacheInverse = cacheInverse, getInverse = getInverse)\n}\n\n\n## `cacheSolve`: This function computes the inverse of the special\n## \"matrix\" returned by `makeCacheMatrix` above. If the inverse has\n## already been calculated (and the matrix has not changed), then\n## `cacheSolve` should retrieve the inverse from the cache.\n\ncacheSolve <- function(y, ...) {\n  ## Get cached value\n  inverse <- y$getInverse()\n  if(!is.null(inverse)) {\n    message(\"getting cached data\")\n    return(inverse)  \n  }\n  # if no cache, get Matrix\n  data <- y$getMatrix()\n  inverse <- solve(data)\n  y$cacheInverse(inverse)\n  \n  inverse\n}\n\n## Create matrix to allow for solve\na <- makeCacheMatrix()\nsummary(a)\n\na$setMatrix( matrix(c(1,2,30,40), nrow = 2, ncol = 2))\na$getMatrix()\n\ncacheSolve(a)\n\n\n",
+    "created" : 1440274432291.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3809329030",
+    "id" : "39F75C15",
+    "lastKnownWriteTime" : 1440278512,
+    "path" : "~/R/ProgrammingAssignment2-master/cachematrix.R",
+    "project_path" : "cachematrix.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
